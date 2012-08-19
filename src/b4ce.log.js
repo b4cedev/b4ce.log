@@ -9,5 +9,4 @@ Log = (function (_) {
 //= b4ce.log.channel.console.js
 
     return Log;
-
 })(_);

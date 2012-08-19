@@ -14,5 +14,5 @@
 
     //= b4ce.log.js
 
-    return B4ce.Log;
+    return Log;
 }));

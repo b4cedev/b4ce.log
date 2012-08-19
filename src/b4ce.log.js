@@ -1,6 +1,6 @@
 
-// B4ce.Log
-B4ce.Log = (function (_) {
+// Log
+Log = (function (_) {
 //        console.log ('initializing b4ce.log...');
 
 //= b4ce.log.util.js

@@ -1,0 +1,59 @@
+{
+    "name": "B4ce.Log",
+    "description": "Highly flexible multi-category multi-channel logging facility for JavaScript",
+    "version": "0.0.1",
+    "homepage": "https://github.com/b4cedev/b4ce.log",
+    "keywords": [
+        "b4ce",
+        "log",
+        "client",
+        "browser"
+    ],
+
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://opensource.org/licenses/mit-license.php/"
+        }
+    ],
+
+    "author": {
+        "name": "Stefan Bunse",
+        "email": "s@b4ce.de",
+        "web": "http://github.com/b4cedev"
+    },
+
+    "bugs": {
+        "web": "https://github.com/b4cedev/b4ce.log/issues"
+    },
+
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/b4cedev/b4ce.log.git"
+    },
+
+    "github": "https://github.com/b4cedev/b4ce.log",
+
+    "dependencies": {
+        "grunt": "*",
+        "grunt-rigger": "*"
+    },
+
+    "volo": {
+        "url": "https://raw.github.com/b4cedev/b4ce.log/v{version}/lib/amd/b4ce.log.js",
+        "dependencies": {
+            "backbone": "_"
+        }
+    },
+
+    "jam":{
+        "dependencies": {
+            "underscore": "1.3.3-jam.1"
+        },
+        "main": "lib/amd/b4ce.log.js",
+        "include": [
+            "lib/amd/b4ce.log.js",
+            "README.md"
+        ]
+    }
+}

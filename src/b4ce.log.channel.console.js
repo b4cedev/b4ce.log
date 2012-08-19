@@ -1,5 +1,3 @@
-/*jslint nomen: true, indent: 4 */
-
 /**
  * ConsoleChannels logs to browser console
  *

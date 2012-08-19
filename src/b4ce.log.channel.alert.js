@@ -1,5 +1,3 @@
-/*jslint nomen: true, indent: 4 */
-
 /**
  * Alert channel logs emerg errors into alert popups.
  *

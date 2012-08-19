@@ -1,4 +1,5 @@
 b4ce.log
 ========
 
-Flexible JavaScript logging facility
+B4ce.Log is a highly flexible JavaScript logging facility.
+

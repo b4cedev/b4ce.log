@@ -15,23 +15,30 @@ module.exports = function (grunt) {
         lint: {
 //            files: ['src/b4ce.log.js']
 //_            files: ['lib/b4ce.log.js']
-            files: ['src/b4ce.log.js']
-//            all: ['grunt.js', 'src/*.js']
+//            files: [
+//                'lib/b4ce.log.js',
+//                'lib/amd/b4ce.log.js',
+//            ]
+            all: ['grunt.js', 'src/**/*.js']
         },
 
         jsHint: {
             options: {
+                // enforcing options
                 curly: true,
                 eqeqeq: true,
+                forin: true,
                 immed: false,
                 latedef: true,
                 newcap: true,
                 noarg: true,
-                sub: true,
+                noempty: true,
+                nonew: true,
+                quotmark: 'single',
                 undef: true,
-                boss: true,
-                eqnull: true,
-                browser: true
+                unused: true,
+                trailing: true,
+                nomen: true
             },
             globals: {
                 _: true

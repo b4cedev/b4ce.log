@@ -1,5 +1,3 @@
-/*jslint nomen: true, indent: 4 */
-
 /**
  * Channel is the base "class" for logging channels
  *

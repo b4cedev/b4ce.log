@@ -1,5 +1,3 @@
-/*jslint nomen: true, indent: 4 */
-
 /**
  * capitalizes the first char of the given string
  *

@@ -1,5 +1,3 @@
-/*jslint nomen: true, indent: 4 */
-
 var Log = function (options) {
     var optKey,
         optVal,

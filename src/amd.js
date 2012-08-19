@@ -1,6 +1,7 @@
 /*jshint indent:4 */
 
 (function (root, factory) {
+
     if (typeof exports === 'object') {
 
         var underscore = require('underscore');

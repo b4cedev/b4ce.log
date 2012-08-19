@@ -1,5 +1,4 @@
 
-// Log
 Log = (function (_) {
 //        console.log ('initializing b4ce.log...');
 

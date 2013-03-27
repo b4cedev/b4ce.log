@@ -1,7 +1,7 @@
 {
     "name": "B4ce.Log",
     "description": "Highly flexible multi-category multi-channel logging facility for JavaScript",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "homepage": "https://github.com/b4cedev/b4ce.log",
     "keywords": [
         "b4ce",

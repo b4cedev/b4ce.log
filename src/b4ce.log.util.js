@@ -1,3 +1,5 @@
+/* jshint unused: false */
+
 /**
  * capitalizes the first char of the given string
  *
@@ -15,21 +17,23 @@ function capitalize(val) {
  * @return {Function}
  */
 function createMethod(cat, lvl) {
+    var logCat = cat;
+
     if (cat === 'common') {
         return function () {
             var args = Array.prototype.slice.call(arguments, arguments);
             if (_.isArray(args[0]) || _.isNumber(args[0])) {
-                cat = args.shift();
+                logCat = args.shift();
             } else {
-                cat = [cat];
+                logCat = [cat];
             }
-            return this.logMessage(cat, lvl, args);
+            return this.logMessage(logCat, lvl, args);
 
         };
     } else {
         return function () {
             var args = Array.prototype.slice.call(arguments, arguments);
-            return this.logMessage([cat], lvl, args);
+            return this.logMessage([logCat], lvl, args);
         };
     }
 }

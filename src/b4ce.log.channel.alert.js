@@ -1,3 +1,4 @@
+/*global Log, window */
 /**
  * Alert channel logs emerg errors into alert popups.
  *

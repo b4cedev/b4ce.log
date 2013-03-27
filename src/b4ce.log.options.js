@@ -1,4 +1,4 @@
-/*jslint nomen: true, indent: 4 */
+/* jshint unused: false */
 
 var options = {
 

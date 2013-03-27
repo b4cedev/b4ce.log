@@ -1,7 +1,9 @@
+/*global B4ce:true, Log */
 
 B4ce = B4ce || {};
 
 B4ce.Log = (function (B4ce, _) {
+/* jshint unused: false */
 //        console.log ('initializing b4ce.log...');
 
 //= b4ce.log.util.js
@@ -13,4 +15,4 @@ B4ce.Log = (function (B4ce, _) {
     B4ce.Log = Log;
 
     return Log;
-})(B4ce, _);
+}(B4ce, _));

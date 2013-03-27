@@ -1,3 +1,4 @@
+/*global Log, window, console */
 /**
  * ConsoleChannels logs to browser console
  *
@@ -9,7 +10,7 @@ Log.ConsoleChannel = function (options) {
 };
 _.extend(Log.ConsoleChannel.prototype, Log.Channel.prototype, {
     filter: function (categories, level, args) {
-        if (window.console === undefined) {
+        if (typeof console !== "object" || typeof console.log !== 'function') {
             return false;
         }
         return Log.Channel.prototype.filter.call(this, categories, level, args);
@@ -20,7 +21,7 @@ _.extend(Log.ConsoleChannel.prototype, Log.Channel.prototype, {
     },
 
     write: function (categories, level, args) {
-        window.console.log.apply(window.console, this.format(categories, level, args));
+        console.log.apply(console, this.format(categories, level, args));
 
         return this;
     }

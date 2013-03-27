@@ -34,9 +34,10 @@
 
     "github": "https://github.com/b4cedev/b4ce.log",
 
-    "dependencies": {
-        "grunt": "*",
-        "grunt-rigger": "*"
+    "devDependencies": {
+        "grunt": "0.4.1",
+        "grunt-contrib": "0.6.1",
+        "grunt-rigger": "0.4.0"
     },
 
     "volo": {

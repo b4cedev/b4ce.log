@@ -39,20 +39,6 @@ grunt.initConfig({
         }
     },
 
-/*
-    rig: {
-        all: {
-            options: {
-                banner: '<%= meta.banner %>'
-            },
-            files: {
-                'lib/b4ce.log.js': ['src/b4ce.log.js'],
-                'lib/amd/b4ce.log.js': ['src/amd.js']
-            }
-        }
-    },
-*/
-
     uglify: {
         'lib/<%= pkg.name %>.min.js': 'lib/<%= pkg.name %>.js'/*,
         'lib/amd/b4ce.log.min.js': 'lib/amd/b4ce.log.js'*/

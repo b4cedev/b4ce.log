@@ -1,20 +1,8 @@
-(function (root, factory) {
-    'use strict';
-
-    // https://github.com/umdjs/umd/blob/master/amdWeb.js
-    if (typeof define === 'function' && define.amd) {
-        // AMD. Register as an anonymous module.
-        define(['underscore'], factory);
-    } else {
-        // Browser globals (root is window)
-        if (!root.B4ce) { root.B4ce = {}; }
-        if (!root.B4ce.Log) { root.B4ce.Log = {}; }
-        root.B4ce.Log.Util = factory(root._);
-    }
-}(this, function (_) {
+/*global _, B4ce */
+(function (root, B4ce) {
 'use strict';
 
-return {
+var Util = {
     /**
      * capitalizes the first char of the given string
      *
@@ -193,5 +181,6 @@ return {
     }
 };
 
+B4ce.Log.Util = Util;
 
-}));
+}(this, B4ce));

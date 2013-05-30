@@ -1,26 +1,5 @@
-(function (root, factory) {
-    'use strict';
-
-    // https://github.com/umdjs/umd/blob/master/amdWeb.js
-    if (typeof define === 'function' && define.amd) {
-        // AMD. Register as an anonymous module.
-        define([
-            'underscore',
-            './b4ce.log.util'
-        ], factory);
-    } else {
-        // Browser globals (root is window)
-        if (!root.B4ce) { root.B4ce = {}; }
-        if (!root.B4ce.Log) { root.B4ce.Log = {}; }
-        root.B4ce.Log.Channel = factory(
-            root._,
-            root.B4ce.Log.Util
-        );
-    }
-}(this, function (
-    _,
-    Util
-) {
+/*global _, B4ce */
+(function (root, B4ce) {
 'use strict';
 
 /**
@@ -33,7 +12,7 @@
 var Channel = function (options) {
     _.extend(this, options);
 };
-Channel.extend = Util.extend;
+Channel.extend = B4ce.Log.Util.extend;
 _.extend(Channel.prototype, {
 
     filter: function (categories, level/*, args*/) {
@@ -73,6 +52,6 @@ _.extend(Channel.prototype, {
 
 });
 
-return Channel;
+B4ce.Log.Channel = Channel;
 
-}));
+}(this, B4ce));

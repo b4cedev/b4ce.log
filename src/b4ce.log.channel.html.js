@@ -1,18 +1,5 @@
-(function (root, factory) {
-    'use strict';
-
-    // https://github.com/umdjs/umd/blob/master/amdWeb.js
-    if (typeof define === 'function' && define.amd) {
-        // AMD. Register as an anonymous module.
-        define(['jquery', './b4ce.log.channel'], factory);
-    } else {
-        // Browser globals (root is window)
-        if (!root.B4ce) { root.B4ce = {}; }
-        if (!root.B4ce.Log) { root.B4ce.Log = {}; }
-        if (!root.B4ce.Log.Channel) { root.B4ce.Log.Channel = {}; }
-        root.B4ce.Log.Channel.HTML = factory(root.jQuery, root.B4ce.Log.Channel);
-    }
-}(this, function ($, BaseChannel) {
+/*global $, B4ce */
+(function (root, B4ce) {
 'use strict';
 
 var _template = $('<div class="log-entry"></div>');
@@ -24,9 +11,9 @@ var _template = $('<div class="log-entry"></div>');
  * @constructor
  */
 
-var Channel = BaseChannel.extend({
+var Channel = B4ce.Log.Channel.extend({
     constructor: function (options) {
-        BaseChannel.call(this, options);
+        B4ce.Log.Channel.call(this, options);
         this.$el = $(options.selector);
     },
 
@@ -34,7 +21,7 @@ var Channel = BaseChannel.extend({
         if (!this.$el) {
             return false;
         }
-        return BaseChannel.prototype.filter.call(this, categories, level, args);
+        return B4ce.Log.Channel.prototype.filter.call(this, categories, level, args);
     },
 
     write: function (categories, level, args) {
@@ -48,9 +35,6 @@ var Channel = BaseChannel.extend({
     }
 });
 
-return Channel;
+B4ce.Log.Channel.HTML = Channel;
 
-}));
-
-
-
+}(this, B4ce));

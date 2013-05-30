@@ -9,23 +9,20 @@
         define([
             'jquery',
             'underscore',
-            'src/b4ce.log',
-            'src/b4ce.log.channel.html'
+            'src/b4ce.log'
         ], factory);
     } else {
         // Browser globals (root is window)
         factory(
             root.jQuery,
             root._,
-            root.B4ce.Log,
-            root.B4ce.Log.Channel.HTML
+            root.B4ce.Log
         );
     }
 }(this, function (
     $,
     _,
-    Log,
-    HTMLChannel
+    Log
 ) {
 'use strict';
 
@@ -69,7 +66,7 @@ test("Init", function() {
 test("HTML Channel", function() {
     expect(2);
 
-    var htmlChannel = new HTMLChannel({
+    var htmlChannel = new Log.Channel.HTML({
         level: Log.DEBUG,
         selector: '#qunit-fixture'
     });

@@ -39,12 +39,14 @@ grunt.initConfig({
     concat: {
         build: {
             src: [
+                'src/umd-prefix.js',
                 'src/b4ce.log.util.js',
                 'src/b4ce.log.channel.js',
                 'src/b4ce.log.channel.alert.js',
                 'src/b4ce.log.channel.console.js',
                 'src/b4ce.log.channel.html.js',
-                'src/b4ce.log.js'
+                'src/b4ce.log.js',
+                'src/umd-suffix.js'
             ],
             dest: 'lib/<%= pkg.name %>.js'
         }

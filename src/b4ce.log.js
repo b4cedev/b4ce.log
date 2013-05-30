@@ -1,37 +1,9 @@
-(function (root, factory) {
-    'use strict';
-    
-    // https://github.com/umdjs/umd/blob/master/amdWeb.js
-    if (typeof define === 'function' && define.amd) {
-        // AMD. Register as an anonymous module.
-        define([
-            'underscore',
-            './b4ce.log.util',
-            './b4ce.log.channel',
-            './b4ce.log.channel.alert',
-            './b4ce.log.channel.console'
-        ], factory);
-    } else {
-        // Browser globals (root is window)
-        root.B4ce.Log = factory(
-            root._,
-            root.B4ce.Log.Util,
-            root.B4ce.Log.Channel,
-            root.B4ce.Log.Channel.Alert,
-            root.B4ce.Log.Channel.Console
-        );
-    }
-}(this, function (
-    _,
-    Util,
-    Channel,
-    AlertChannel,
-    ConsoleChannel
-) {
+/*global _, B4ce */
+(function (root, B4ce) {
 'use strict';
 
 // sanitize browser
-Util.sanitizeBrowser();
+B4ce.Log.Util.sanitizeBrowser();
 
 var levels = [
     "debug",
@@ -50,8 +22,8 @@ _.each(levels, function (name) {
 });
 
 var defaultChannels = {
-    alert: AlertChannel,
-    console: ConsoleChannel
+    alert: B4ce.Log.Channel.Alert,
+    console: B4ce.Log.Channel.Console
 };
 
 var Log = function (options) {
@@ -92,13 +64,13 @@ var Log = function (options) {
     this.createCategoryMethods();
 };
 
-_.extend(Log, {
-    /**
-     * constructor properties ("static class properties")
-     */
-    Util: Util,
-    Channel: Channel
-});
+//_.extend(Log, {
+//    /**
+//     * constructor properties ("static class properties")
+//     */
+//    Util: Util,
+//    Channel: Channel
+//});
 _.each(levelMap, function (val, key) {
     Log[key.toUpperCase()] = val;
 });
@@ -144,7 +116,7 @@ _.extend(Log.prototype, {
         if (this.channels[name]) {
             throw new Error('Channel name already registered: ' + name);
         }
-        if (ChannelOptions instanceof Channel) {
+        if (ChannelOptions instanceof B4ce.Log.Channel) {
             // add prebuilt custom channel
             ChannelOptions.log = this;
             this.channels[name] = ChannelOptions;
@@ -227,12 +199,12 @@ _.extend(Log.prototype, {
                 if (curCat === 'common') {
                     curMeth = curLvl;
                 } else {
-                    curMeth = curCat + Util.capitalize(curLvl);
+                    curMeth = curCat + B4ce.Log.Util.capitalize(curLvl);
                 }
                 if (log[curMeth] !== undefined) {
                     log.logMessage(log.categories.common, log.levelMap.info, 'Cannot create log method "' + curMeth + '"');
                 } else {
-                    log[curMeth] = Util.createMethod(curCat, curLvl);
+                    log[curMeth] = B4ce.Log.Util.createMethod(curCat, curLvl);
                 }
             });
         });
@@ -348,6 +320,7 @@ _.extend(Log.prototype, {
 
 });
 
-return Log;
+B4ce.Log = _.extend(Log, B4ce.Log);
 
-}));
+}(this, B4ce));
+

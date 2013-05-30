@@ -1,18 +1,5 @@
-(function (root, factory) {
-    'use strict';
-
-    // https://github.com/umdjs/umd/blob/master/amdWeb.js
-    if (typeof define === 'function' && define.amd) {
-        // AMD. Register as an anonymous module.
-        define(['underscore', './b4ce.log.channel'], factory);
-    } else {
-        // Browser globals (root is window)
-        if (!root.B4ce) { root.B4ce = {}; }
-        if (!root.B4ce.Log) { root.B4ce.Log = {}; }
-        if (!root.B4ce.Log.Channel) { root.B4ce.Log.Channel = {}; }
-        root.B4ce.Log.Channel.Alert = factory(root._, root.B4ce.Log.Channel);
-    }
-}(this, function (_, BaseChannel) {
+/*global _, B4ce */
+(function (root, B4ce) {
 'use strict';
 
 /**
@@ -21,19 +8,19 @@
  * @param options
  * @constructor
  */
-var Channel = BaseChannel.extend({
+var Channel = B4ce.Log.Channel.extend({
     constructor: function (options) {
         options = _.extend({
             level: 'alert'
         }, options);
-        BaseChannel.call(this, options);
+        B4ce.Log.Channel.call(this, options);
     },
 
     filter: function (categories, level, args) {
         if (window.alert === undefined) {
             return false;
         }
-        return BaseChannel.prototype.filter.call(this, categories, level, args);
+        return B4ce.Log.Channel.prototype.filter.call(this, categories, level, args);
     },
 
     timestamp: function (/*categories, level, args*/) {
@@ -45,6 +32,6 @@ var Channel = BaseChannel.extend({
     }
 });
 
-return Channel;
+B4ce.Log.Channel.Alert = Channel;
 
-}));
+}(this, B4ce));

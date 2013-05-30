@@ -22,8 +22,7 @@ grunt.initConfig({
         all: [
             'Gruntfile.js',
             'src/**/*.js',
-            '!src/amd.js',
-            '!src/b4ce.log.js'
+            'test/*.js'
         ]
     },
 
@@ -59,6 +58,14 @@ grunt.initConfig({
         'lib/amd/b4ce.log.min.js': 'lib/amd/b4ce.log.js'*/
     },
 
+    qunit: {
+        options: {
+            '--web-security': 'no',
+            timeout: 40000
+        },
+        all: ['test/**/*.html']
+    },
+
     /**
      * Watch task
      */
@@ -66,6 +73,10 @@ grunt.initConfig({
         jshint: {
             files: ['<%= jshint.all %>'],
             tasks: ['jshint']
+        },
+        qunit: {
+            files: ['<%= jshint.all %>', '<%= qunit.all %>', ],
+            tasks: ['qunit']
         },
         concat: {
             files: ['Gruntfile.js', '<%= concat.build.src %>'],
@@ -78,12 +89,16 @@ grunt.initConfig({
     }
 });
 
+grunt.loadNpmTasks('grunt-contrib-concat');
+grunt.loadNpmTasks('grunt-contrib-jshint');
+grunt.loadNpmTasks('grunt-contrib-qunit');
+grunt.loadNpmTasks('grunt-contrib-uglify');
+grunt.loadNpmTasks('grunt-contrib-watch');
+
 // Default task.
 //    grunt.registerTask('default', ['jshint', 'rig', 'uglify']);
-grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
-
-grunt.loadNpmTasks('grunt-contrib');
-//    grunt.loadNpmTasks('grunt-rigger');
+grunt.registerTask('test', ['jshint', 'qunit']);
+grunt.registerTask('default', ['test', 'concat', 'uglify']);
 
 
 };

@@ -37,25 +37,10 @@
 
     "devDependencies": {
         "grunt": "0.4.1",
-        "grunt-contrib": "0.6.1",
-        "grunt-rigger": "0.4.0"
-    },
-
-    "volo": {
-        "url": "https://raw.github.com/b4cedev/b4ce.log/v{version}/lib/amd/b4ce.log.js",
-        "dependencies": {
-            "backbone": "_"
-        }
-    },
-
-    "jam":{
-        "dependencies": {
-            "underscore": "1.3.3-jam.1"
-        },
-        "main": "lib/amd/b4ce.log.js",
-        "include": [
-            "lib/amd/b4ce.log.js",
-            "README.md"
-        ]
+        "grunt-contrib-concat": "0.3.0",
+        "grunt-contrib-jshint": "0.5.4",
+        "grunt-contrib-qunit": "0.2.1",
+        "grunt-contrib-uglify": "0.2.1",
+        "grunt-contrib-watch": "0.4.4"
     }
 }

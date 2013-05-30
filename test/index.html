@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>B4ce.Log Test Suite - Browser Globals</title>
+
+    <!-- Load local QUnit (grunt requires v1.0.0 or newer). -->
+    <link rel="stylesheet" href="css/qunit.css" media="screen">
+    <script src="js/qunit.js"></script>
+    <script>
+QUnit.config.autostart = false;
+QUnit.config.testTimeout = 5000;
+QUnit.config.reorder = false;
+    </script>
+    <script data-main="main" src="js/require.js"></script>
+</head>
+<body>
+<h1 id="qunit-header">B4ce.Log Test Suite - Browser Globals</h1>
+
+<h2 id="qunit-banner"></h2>
+
+<div id="qunit-testrunner-toolbar"></div>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests"></ol>
+<div id="qunit-fixture">
+    <span>lame test markup</span>
+    <span>normal test markup</span>
+    <span>awesome test markup</span>
+</div>
+</body>
+</html>

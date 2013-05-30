@@ -1,0 +1,33 @@
+{
+    "curly": true,
+    "eqeqeq": true,
+    "forin": true,
+    "immed": true,
+    "latedef": true,
+    "newcap": true,
+    "noarg": true,
+    "nonew": true,
+    "undef": true,
+    "unused": true,
+    "strict": true,
+    "boss": true,
+    "eqnull": true,
+    "expr": true,
+    "laxbreak": true,
+    "laxcomma": true,
+    "browser": true,
+    "devel": true,
+    "jquery": true,
+    "globals": {
+        "define": false,
+        "module": false,
+        "require": false,
+        "test": false,
+        "asyncTest": false,
+        "expect": false,
+        "start": false,
+        "ok": false,
+        "fail": false,
+        "equal": false
+    }
+}

@@ -1,3 +1,4 @@
+(function () {
 'use strict';
 
 require.config({
@@ -23,3 +24,5 @@ require.config({
 });
 
 require(['test.js']);
+
+})(this);

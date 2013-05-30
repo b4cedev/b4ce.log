@@ -17,8 +17,8 @@
             root._,
             root.B4ce.Log.Util,
             root.B4ce.Log.Channel,
-            root.B4ce.Log.AlertChannel,
-            root.B4ce.Log.ConsoleChannel
+            root.B4ce.Log.Channel.Alert,
+            root.B4ce.Log.Channel.Console
         );
     }
 }(this, function (
@@ -48,7 +48,6 @@ var levelMap = {};
 _.each(levels, function (name) {
     levelMap[name] = ++levelValMax;
 });
-console.log('levelMap:', levelMap);
 
 var defaultChannels = {
     alert: AlertChannel,
@@ -79,7 +78,7 @@ var Log = function (options) {
     if (options.categories) {
         this.addCategories(options.categories);
     }
-    console.log('Log(): categories, categoryLevel:', this.categories, this.categoryLevel);
+//    console.log('Log(): categories, categoryLevel:', this.categories, this.categoryLevel);
 
     // setup instance log channels
     this.channels = {};

@@ -19,11 +19,21 @@ grunt.initConfig({
             jshintrc: '.jshintrc',
             force: true
         },
-        all: [
-            'Gruntfile.js',
-            'src/**/*.js',
-            'test/*.js'
-        ]
+        source: {
+            src: [
+                'Gruntfile.js',
+                'src/**/*.js',
+                '!src/umd-*fix.js'
+            ]
+        },
+        test: {
+            options: {
+                jshintrc: 'test/.jshintrc'
+            },
+            src: [
+                'test/*.js'
+            ]
+        }
     },
 
     concat: {
@@ -33,6 +43,7 @@ grunt.initConfig({
                 'src/b4ce.log.channel.js',
                 'src/b4ce.log.channel.alert.js',
                 'src/b4ce.log.channel.console.js',
+                'src/b4ce.log.channel.html.js',
                 'src/b4ce.log.js'
             ],
             dest: 'lib/<%= pkg.name %>.js'
@@ -56,21 +67,24 @@ grunt.initConfig({
      * Watch task
      */
     watch: {
-        jshint: {
-            files: ['<%= jshint.all %>'],
-            tasks: ['jshint']
+        most: {
+            files: [
+                '<%= jshint.source.src %>',
+                '<%= jshint.test.src %>'
+            ],
+            tasks: [
+                'build',
+                'test'
+            ]
         },
-        qunit: {
-            files: ['<%= jshint.all %>', '<%= qunit.all %>', ],
-            tasks: ['qunit']
-        },
-        concat: {
-            files: ['Gruntfile.js', '<%= concat.build.src %>'],
-            tasks: ['concat']
-        },
-        uglify: {
-            files: ['Gruntfile.js', 'lib/b4ce.log.js'],
-            tasks: ['uglify']
+        wrapper: {
+            files: [
+                'src/umd-*fix.js'
+            ],
+            tasks: [
+                'build',
+                'test'
+            ]
         }
     }
 });
@@ -81,10 +95,9 @@ grunt.loadNpmTasks('grunt-contrib-qunit');
 grunt.loadNpmTasks('grunt-contrib-uglify');
 grunt.loadNpmTasks('grunt-contrib-watch');
 
-// Default task.
-//    grunt.registerTask('default', ['jshint', 'rig', 'uglify']);
 grunt.registerTask('test', ['jshint', 'qunit']);
-grunt.registerTask('default', ['test', 'concat', 'uglify']);
+grunt.registerTask('build', ['concat', 'uglify']);
+grunt.registerTask('default', ['test', 'build']);
 
 
 };

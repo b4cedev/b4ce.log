@@ -4,14 +4,23 @@
     // https://github.com/umdjs/umd/blob/master/amdWeb.js
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
-        define(['underscore', './b4ce.log.util'], factory);
+        define([
+            'underscore',
+            './b4ce.log.util'
+        ], factory);
     } else {
         // Browser globals (root is window)
         if (!root.B4ce) { root.B4ce = {}; }
         if (!root.B4ce.Log) { root.B4ce.Log = {}; }
-        root.B4ce.Log.Channel = factory(root._, root.B4ce.Log.Util);
+        root.B4ce.Log.Channel = factory(
+            root._,
+            root.B4ce.Log.Util
+        );
     }
-}(this, function (_, Util) {
+}(this, function (
+    _,
+    Util
+) {
 'use strict';
 
 /**

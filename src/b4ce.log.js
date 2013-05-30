@@ -47,6 +47,7 @@ var Log = function (options) {
         common: undefined
     };
     this.categoryValMax = this.categories.common;
+    this.createCategoryMethods();
     if (options.categories) {
         this.addCategories(options.categories);
     }
@@ -61,7 +62,6 @@ var Log = function (options) {
     }
 //    console.log('Log(): channels: ', this.channels);
 
-    this.createCategoryMethods();
 };
 
 //_.extend(Log, {
@@ -91,6 +91,7 @@ _.extend(Log.prototype, {
             this.categories[name] = this.categoryValMax;
         }
         this.categoryLevel[name] = this.sanitizeLevel(level);
+        this.createCategoryMethods(name);
 
         return this;
     },
@@ -149,6 +150,27 @@ _.extend(Log.prototype, {
         }
 
         return this;
+    },
+
+    removeChannel: function (name) {
+        if (!this.channels[name]) {
+            throw new Error("Cannot remove non-existent channel: " + JSON.stringify(name));
+        }
+        delete this.channels[name];
+
+        return this;
+    },
+
+    getLevel: function (category) {
+        if (_.isUndefined(category)) {
+            return this.defaultLevel;
+        }
+        var level = this.categoryLevel[category];
+        if (_.isUndefined(level)) {
+            throw new Error("Cannot remove non-existent channel: " + JSON.stringify(name));
+        }
+
+        return level;
     },
 
     setLevel: function (level, category) {

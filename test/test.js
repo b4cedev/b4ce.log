@@ -3,15 +3,27 @@
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
         define([
+            'jquery',
             'underscore',
-            'src/b4ce.log'/*,
+            'src/b4ce.log',
+            'src/b4ce.log.channel.html'/*,
             'b4ce.log.channel.console'*/
         ], factory);
     } else {
         // Browser globals (root is window)
-        factory(_, B4ce.Log);
+        factory(
+            root.jQuery,
+            root._,
+            root.B4ce.Log,
+            root.B4ce.Log.Channel.HTML
+        );
     }
-}(this, function (_, Log) {
+}(this, function (
+    $,
+    _,
+    Log,
+    HTMLChannel
+) {
 
 start();
 
@@ -49,6 +61,28 @@ test("Init", function() {
     log.warning('hi warning');
     log.debug('hi debug');
     console = realConsole;
+});
+
+test("HTML Channel", function() {
+    expect(2);
+
+    var htmlChannel = new HTMLChannel({
+        level: Log.DEBUG,
+        selector: '#qunit-fixture'
+    });
+    ok(htmlChannel instanceof Log.Channel, 'htmlChannel is instance of Log.Channel');
+
+    var log = new Log({
+        channels: {
+            console: true,
+            html: htmlChannel
+        }
+    });
+
+    var msg = 'HTML Test';
+    log.debug(msg);
+    ok($(htmlChannel.selector + ' .log-entry').text().indexOf(msg) !== -1, 'Found log message in HTML element.');
+
 });
 
 }));

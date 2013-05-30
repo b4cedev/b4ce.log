@@ -8,7 +8,7 @@
  * @param options
  * @constructor
  */
-var Channel = B4ce.Log.Channel.extend({
+B4ce.Log.Channel.Alert = B4ce.Log.Channel.extend({
     constructor: function (options) {
         options = _.extend({
             level: 'alert'
@@ -31,7 +31,5 @@ var Channel = B4ce.Log.Channel.extend({
         window.alert(this.format(categories, level, args));
     }
 });
-
-B4ce.Log.Channel.Alert = Channel;
 
 }(this, B4ce));

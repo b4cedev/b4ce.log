@@ -8,7 +8,7 @@
  * @param options
  * @constructor
  */
-var Channel = B4ce.Log.Channel.extend({
+B4ce.Log.Channel.Console = B4ce.Log.Channel.extend({
     filter: function (categories, level, args) {
         if (typeof console !== "object" || typeof console.log !== 'function') {
             return false;
@@ -35,7 +35,5 @@ var Channel = B4ce.Log.Channel.extend({
         return this;
     }
 });
-
-B4ce.Log.Channel.Console = Channel;
 
 }(this, B4ce));

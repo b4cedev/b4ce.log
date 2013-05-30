@@ -11,7 +11,7 @@ var _template = $('<div class="log-entry"></div>');
  * @constructor
  */
 
-var Channel = B4ce.Log.Channel.extend({
+B4ce.Log.Channel.HTML = B4ce.Log.Channel.extend({
     constructor: function (options) {
         B4ce.Log.Channel.call(this, options);
         this.$el = $(options.selector);
@@ -34,7 +34,5 @@ var Channel = B4ce.Log.Channel.extend({
         return this;
     }
 });
-
-B4ce.Log.Channel.HTML = Channel;
 
 }(this, B4ce));

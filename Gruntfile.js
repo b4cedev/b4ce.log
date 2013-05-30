@@ -7,11 +7,11 @@ grunt.initConfig({
 
     meta:{
         banner:
-            '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
-            '<%= grunt.template.today("yyyy-mm-dd") %>\\n' +
-            '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
-            '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %><%= pkg.author.email ? " <" + pkg.author.email + ">": "" %>;' +
-            ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
+            '/**\n * <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
+            '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
+            '<%= pkg.homepage ? " * " + pkg.homepage + "\\n" : "" %>' +
+            ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %><%= pkg.author.email ? " <" + pkg.author.email + ">": "" %>;' +
+            ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %>\n */\n'
     },
 
     jshint: {
@@ -37,6 +37,9 @@ grunt.initConfig({
     },
 
     concat: {
+        options: {
+            banner: '<%= meta.banner %>'
+        },
         build: {
             src: [
                 'src/umd-prefix.js',
@@ -53,6 +56,9 @@ grunt.initConfig({
     },
 
     uglify: {
+        options: {
+            banner: '<%= meta.banner %>'
+        },
         'lib/<%= pkg.name %>.min.js': 'lib/<%= pkg.name %>.js'/*,
         'lib/amd/b4ce.log.min.js': 'lib/amd/b4ce.log.js'*/
     },

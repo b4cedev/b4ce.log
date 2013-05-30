@@ -100,6 +100,9 @@ _.extend(Log, {
     Util: Util,
     Channel: Channel
 });
+_.each(levelMap, function (val, key) {
+    Log[key.toUpperCase()] = val;
+});
 
 _.extend(Log.prototype, {
     /**
@@ -144,6 +147,7 @@ _.extend(Log.prototype, {
         }
         if (ChannelOptions instanceof Channel) {
             // add prebuilt custom channel
+            ChannelOptions.log = this;
             this.channels[name] = ChannelOptions;
         } else if (_.isFunction(ChannelOptions)) {
             this.channels[name] = new ChannelOptions({log: this});

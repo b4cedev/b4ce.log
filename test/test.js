@@ -64,7 +64,7 @@ test("Init", function() {
 });
 
 test("HTML Channel", function() {
-    expect(2);
+    expect(3);
 
     var htmlChannel = new Log.Channel.HTML({
         level: Log.DEBUG,
@@ -72,11 +72,12 @@ test("HTML Channel", function() {
     });
     ok(htmlChannel instanceof Log.Channel, 'htmlChannel is instance of Log.Channel');
 
-    var log = new Log({
+    var log = window.log = new Log({
         channels: {
             html: htmlChannel
         }
     });
+    equal(log.channels.html, htmlChannel, 'htmlChannel is attached to log');
 
     var msg = 'HTML Test';
     log.debug(msg);

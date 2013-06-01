@@ -10,10 +10,29 @@
  */
 
 var Channel = function (options) {
-    _.extend(this, options);
+    if (!options) {
+        options = {};
+    }
+    if (options.level) {
+        this.level = options.level;
+    }
+    if (options.timestampFormatter) {
+        this.timestampFormatter = options.timestampFormatter;
+    }
+    if (options.log) {
+        this.setLog(options.log);
+    }
 };
 Channel.extend = B4ce.Log.Util.extend;
 _.extend(Channel.prototype, {
+    log: undefined,
+    level: null,
+    timestampFormatter: 'default',
+
+    setLog: function (log) {
+        this.log = log;
+        this.setTimestampFormatter();
+    },
 
     filter: function (categories, level/*, args*/) {
         // check level
@@ -25,7 +44,16 @@ _.extend(Channel.prototype, {
     },
 
     timestamp: function (/*categories, level, args*/) {
-        return new Date().toISOString();
+        return this._stampFormatter(new Date());
+    },
+
+    setTimestampFormatter: function (key) {
+        if (key) {
+            this.timestampFormatter = key;
+        }
+        if (this.log) {
+            this._stampFormatter = this.log.getTimestampFormatter(this.timestampFormatter);
+        }
     },
 
     prefix: function (categories, level, args) {

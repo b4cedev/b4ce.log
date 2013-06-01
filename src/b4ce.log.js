@@ -87,6 +87,13 @@ _.extend(Log.prototype, {
     // define valid levels (borrowed by posix syslog standard)
     levels: levelMap,
     defaultLevel: 'debug',
+
+    defaultTimeStampFormatter: 'short',
+    timeStampFormatters: {
+        'iso': 'formatTimestampISO',
+        'short': 'formatTimestampShort',
+        'utcshort': 'formatTimestampUTCShort'
+    },
     
     addCategory: function (name, level) {
         if (!this.categories[name]) {
@@ -123,7 +130,7 @@ _.extend(Log.prototype, {
         }
         if (ChannelOptions instanceof B4ce.Log.Channel) {
             // add prebuilt custom channel
-            ChannelOptions.log = this;
+            ChannelOptions.setLog(this);
             this.channels[name] = ChannelOptions;
         } else if (_.isFunction(ChannelOptions)) {
             this.channels[name] = new ChannelOptions({log: this});
@@ -283,6 +290,50 @@ _.extend(Log.prototype, {
         return this;
     },
 
+    getFormattedTimestamp: function (format, date) {
+        if (_.isUndefined(format)) {
+        }
+        if (_.isUndefined(date)) {
+            date = new Date();
+        }
+    },
+
+    getTimestampFormatter: function (key) {
+        if (!key || key === 'default') {
+            key = this.defaultTimeStampFormatter;
+        }
+        var res = this.timeStampFormatters[key];
+        if (!res) {
+            throw new Error('Invalid timestamp formatter name: ' + key);
+        }
+        if (_.isString(res)) {
+            if (!_.isFunction(this[res])) {
+                throw new Error('Invalid timestamp formatter method: ' + res);
+            }
+            res = this.timeStampFormatters[key] = this[res];
+        }
+        return res;
+    },
+
+    formatTimestampISO: function (date) {
+        return date.toISOString();
+    },
+
+    formatTimestampShort: function (date) {
+        return _.map(['getHours', 'getMinutes', 'getSeconds'], function (meth) {
+            var val = date[meth]();
+            return (val < 10 && '0' + val) || val;
+//            if (val < 10) {
+//                val = '0' + val
+//            }
+//            return val;
+        }).join(':');
+    },
+
+    formatTimestampUTCShort: function (date) {
+        return date.getUTCHours() + ':' + date.getUTCMinutes() + ':' + date.getUTCSeconds();
+    },
+
     createCategoryMethods: function (category) {
         var categoryNames;
         if (!_.isUndefined(category)) {
@@ -388,7 +439,7 @@ _.extend(Log.prototype, {
         categories = this.sanitizeCategories(categories);
         level = this.sanitizeLevel(level);
 
-//                console.log('Log.logMessage(): categories, level, args:', categories, level, args);
+//        console.log('Log.logMessage(): categories, level, args:', categories, level, args);
 
         // iterate over all logging categories
         for (i = 0, j = categories.length; i < j; i = i + 1) {
@@ -398,7 +449,7 @@ _.extend(Log.prototype, {
                 msgCategories.push(key);
             }
         }
-//                console.log('Log.logMessage(): msgCategories:', msgCategories);
+//        console.log('Log.logMessage(): msgCategories:', msgCategories);
         if (!msgCategories.length) {
             // message does not pass category / level filter => return
             return this;
@@ -412,6 +463,7 @@ _.extend(Log.prototype, {
                 channelMsgCategories = msgCategories;
                 // check if message passes channel filter, if so => deliver
                 if (channel.filter(msgCategories, level, args)) {
+//                    console.log('Log.logMessage(): writing to channel:', channel);
                     channel.write(msgCategories, level, args);
                 }
             }

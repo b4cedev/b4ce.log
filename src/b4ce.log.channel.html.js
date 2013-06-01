@@ -13,14 +13,19 @@ var _template = $('<div class="log-entry"></div>');
 
 B4ce.Log.Channel.HTML = B4ce.Log.Channel.extend({
     constructor: function (options) {
-        B4ce.Log.Channel.call(this, options);
+        if (!options.selector) {
+            throw new Error('Required option "selector" missing!');
+        }
+        this.selector = options.selector;
         this.$el = $(options.selector);
+        B4ce.Log.Channel.call(this, options);
     },
 
     filter: function (categories, level, args) {
         if (!this.$el) {
             return false;
         }
+
         return B4ce.Log.Channel.prototype.filter.call(this, categories, level, args);
     },
 

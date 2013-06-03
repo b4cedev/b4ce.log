@@ -65,7 +65,7 @@ _.extend(Channel.prototype, {
         prefixParts.push(level.toUpperCase());
         tmp = _.without(categories, 'common');
         if (tmp.length) {
-            prefixParts.push(' [' + tmp.join(',') + ']');
+            prefixParts.push('[' + tmp.join(',') + ']');
         }
         return prefixParts.join(' ') + ':';
     },
